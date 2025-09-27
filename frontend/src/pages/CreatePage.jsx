@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Container, Heading, Input, VStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Input, VStack, useColorModeValue , useToast} from '@chakra-ui/react';
 import { useState } from 'react';
 
 
@@ -10,12 +10,35 @@ const CreatePage = () => {
         image: '',
     });
 
-    const handleAddProduct = () => {
+    const toast = useToast(); // toast closes itself after a few seconds
+
+
+    const handleAddProduct = async () => {
         // Logic to handle adding the new product
         console.log('New Product:', newProduct);
-        // Reset form
-        setNewProduct({ name: '', price: '', image: '' });
-    }
+        
+        const {success, message} = await createProduct(newProduct); // from store/product.js
+
+        if (!success) {
+            toast({
+                title: "Error",
+                description: message,
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+            return;
+        } else {
+            toast({
+                title: "Success",
+                description: "Product created successfully",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
+        }
+        setNewProduct({ name: '', price: '', image: '' }); // Clear the form after submission
+    };
 
   return <Container maxW="container.sm">
     <VStack spacing={8}>
