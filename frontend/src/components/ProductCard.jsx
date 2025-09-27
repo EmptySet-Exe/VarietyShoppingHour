@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
 	const textColor = useColorModeValue("gray.600", "gray.200");
 	const bg = useColorModeValue("white", "gray.800");
 
-	const { deleteProduct, updateProduct } = useProductStore();
+	const { deleteProduct, updateProduct, fetchProducts} = useProductStore();
 	const toast = useToast();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -55,6 +55,7 @@ const ProductCard = ({ product }) => {
 				duration: 3000,
 				isClosable: true,
 			});
+			await fetchProducts(); // Refresh the product list after deletion
 		}
 	};
 
@@ -77,6 +78,7 @@ const ProductCard = ({ product }) => {
 				duration: 3000,
 				isClosable: true,
 			});
+			await fetchProducts(); // Refresh the product list after update
 		}
 	};
 
