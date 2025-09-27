@@ -12,6 +12,7 @@ import productRoutes from "./routes/productRoute.js";
 dotenv.config();
 const app = express();
 
+app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Allows JSON data in the req.body
 
 /// Route (API Endpoints) ///
@@ -22,6 +23,7 @@ app.get("/", (req, res) =>
 
 app.use("/api/products",productRoutes); // Calls the relevant existent Product Route(s)
 
+const PORT = 3000;
 // Start the server to listen on `port`
 app.listen(port, () => 
 {
