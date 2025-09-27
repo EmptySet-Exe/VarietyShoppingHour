@@ -58,3 +58,10 @@ const connectDB = async () =>
     }
 
     connectDB(); // Run the connect function
+
+// ============== NEW CODE FOR DATABASES ===============
+
+const productRoutes = require("./routes/product.route.js");
+
+app.use(express.json());
+app.use("/api/products", productRoutes);
