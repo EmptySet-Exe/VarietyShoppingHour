@@ -1,5 +1,5 @@
     import React from 'react'
-    import { Container, Flex, Text, HStack, Button, useColorMode, useColorModeValue} from "@chakra-ui/react";
+    import { Container, Flex, Text, HStack, Button, useColorMode} from "@chakra-ui/react";
       
     import { Link } from 'react-router-dom'
     import { PlusSquareIcon } from '@chakra-ui/icons'
@@ -9,12 +9,10 @@
 
     const Navbar = () => {
         
-        const { colorMode, toggleColorMode } = useColorMode(); 
-
-        const bg = useColorModeValue("gray.100", "gray.900");
+        const { colorMode, toggleColorMode } = useColorMode();
 
         return( 
-        < Container maxW = {"1140px"} px={4} py={4} bg={bg}>
+        < Container maxW = {"1140px"} px={4} py={4}>
         <Flex
             h={16}
             alignItems={"center"}
