@@ -6,8 +6,9 @@ const port = 3000;
 
 
 
-app.get("/", (req, res) =>
-{res.send("Sucessfully called the web server")})
+app.get("/", (req, res) => {
+    res.send("Sucessfully called the web server")
+});
 
 const connectDB = async () => 
     {
@@ -23,3 +24,10 @@ const connectDB = async () =>
         }
     }
     connectDB();
+
+// ============== NEW CODE FOR DATABASES ===============
+
+const productRoutes = require("./routes/product.route.js");
+
+app.use(express.json());
+app.use("/api/products", productRoutes);
