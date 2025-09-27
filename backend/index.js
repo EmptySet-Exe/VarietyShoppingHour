@@ -47,8 +47,8 @@ console.log('MONGODB_DB:', process.env.MONGODB_DB);
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { logger } = require('./middleware/logger')
-const errorHandler = require('./middleware/errorHandler')
+const logger = require('../middleware/logger')
+const errorHandler = require('../middleware/errorHandler')
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
