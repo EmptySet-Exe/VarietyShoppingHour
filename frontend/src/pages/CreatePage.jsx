@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Button, Container, Heading, Input, VStack, useColorModeValue , useToast} from '@chakra-ui/react';
 import { useState } from 'react';
+import { useProductStore } from "../store/product";
 
 
 const CreatePage = () => {
@@ -11,13 +12,32 @@ const CreatePage = () => {
     });
 
     const toast = useToast(); // toast closes itself after a few seconds
+    
+    const { createProduct } = useProductStore();
 
 
     const handleAddProduct = async () => {
+        const {name, price, image} = newProduct;
+
+        if (!name || !price || !image) {
+            toast({
+              title: "Error",
+              description: "Please fill all fields",
+              status: "error",
+              duration: 5000,
+              isClosable: true,
+            });
+            return;
+        }
+
         // Logic to handle adding the new product
         console.log('New Product:', newProduct);
         
-        const {success, message} = await createProduct(newProduct); // from store/product.js
+        const {success, message} = await createProduct({
+            name,
+            price: Number(price), // Ensure price is a number
+            image,
+        }); // from store/product.js
 
         if (!success) {
             toast({
