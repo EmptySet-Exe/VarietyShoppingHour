@@ -1,6 +1,6 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const Product = require("../models/product.model.js");
-const mongoose = require('mongoose');
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import Product from "../models/product.model.js";
+// import mongoose from 'mongoose';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -54,7 +54,7 @@ function formatPromptForSuggestion(productData, userPrompt){
     Please provide product suggestions based on this preference: ${userPrompt}
 
     Respond with the ids of the products only.
-    If more than one product matches the preference, respond with comma separated list of product ids.
+    If more than one product matches the preference, respond with json array containing the list of product ids.
     If no product matches the preference, respond with "None".
     `;
 }
@@ -67,4 +67,4 @@ function formatPromptForPlainText(userPrompt) {
     Response:`;
 }
 
-module.exports = {promptAI, generateSuggestion}
+export {promptAI, generateSuggestion};

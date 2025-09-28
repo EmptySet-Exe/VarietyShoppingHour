@@ -1,8 +1,8 @@
 // =============== AI STUFF =============================
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const { promptAI, generateSuggestion } = require('../controllers/gemini.controller.js');
+import { promptAI, generateSuggestion } from '../controllers/gemini.controller.js';
 
 // const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT;
 // const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION;
@@ -22,7 +22,7 @@ router.post('/', promptAI);
 router.post('/suggestion', generateSuggestion)
 
 
-module.exports = router;
+export default router;
 
 
 
