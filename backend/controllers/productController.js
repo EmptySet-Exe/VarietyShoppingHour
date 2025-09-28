@@ -40,7 +40,7 @@ export const createProduct = async (req, res) =>
     {
         res.status(400).json({success: false, message: "Server Error"});
 
-        console.error("Error: Failed to create product!\n", error.message);
+        console.error("Error: Failed to create product!\n", err.message);
     }
 
     res.send("Sucessfully called the web server")
@@ -85,6 +85,6 @@ export const deleteProduct = async (req,res) =>
     catch(err)
     {
         res.status(500).json({success: false, message: "Server Error"});
-        console.error("Error: Failed to delete product!\n", error.message);
+        console.error("Error: Failed to delete product!\n", err.message);
     }
 }
