@@ -1,25 +1,32 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
+// Package Import(s)
+import express from "express"
+import dotenv from "dotenv";
+import cors from "cors";   
+const port = process.env.BACKEND_PORT || 3000;  
+
+// Function Import(s)
+import { connectDB } from "./config/db.js";
+import productRoutes from "./routes/productRoute.js";
+
+// Initialize Configuration(s)
+dotenv.config();
 const app = express();
-const port = 3000;  
 
+app.use(cors()); // Enable CORS for all routes
+app.use(express.json()); // Allows JSON data in the req.body
 
+/// Route (API Endpoints) ///
+app.get("/", (req, res) => 
+{
+    res.send("Successfully called the web server");
+});
 
-app.get("/", (req, res) =>
-{res.send("Sucessfully called the web server")})
+app.use("/api/products",productRoutes); // Calls the relevant existent Product Route(s)
 
-const connectDB = async () => 
-    {
-        try {
-            await mongoose.connect(process.env.MONGODB_URI);
-            console.log("Connected to MongoDB")
-            app.listen(port, () => 
-                {console.log("Server is running on port 3000")})
-        }
-        catch(err) {
-            console.log(err);
-            process.exit(1);
-        }
-    }
-    connectDB();
+const PORT = 3000;
+// Start the server to listen on `port`
+app.listen(port, () => 
+{
+    connectDB(); // Connect to the Database
+    console.log(`Server is running on port ${port}`);
+});
