@@ -2,15 +2,16 @@
 import express from "express"
 import dotenv from "dotenv";
 import cors from "cors";   
-const port = process.env.BACKEND_PORT || 3000;  
 
 // Function Import(s)
 import { connectDB } from "./config/db.js";
 import productRoutes from "./routes/productRoute.js";
+import geminiRoutes from "./routes/gemini.route.js";
 
 // Initialize Configuration(s)
 dotenv.config();
 const app = express();
+const port = process.env.BACKEND_PORT || 3000;  
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Allows JSON data in the req.body
@@ -30,3 +31,6 @@ app.listen(port, () =>
     connectDB(); // Connect to the Database
     console.log(`Server is running on port ${port}`);
 });
+
+
+app.use("/api/gemini", geminiRoutes)
