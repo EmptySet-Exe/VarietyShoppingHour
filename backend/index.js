@@ -55,9 +55,9 @@ const rateLimit = require('express-rate-limit');
 
 let authRoutes;
 try {
-  authRoutes = require('./routes/auth_routes');
+  authRoutes = require('./routes/authRoutes');
 } catch {
-  console.warn('./routes/auth_routes not found yet — skipping');
+  console.warn('./routes/authRoutes not found yet — skipping');
 }
 
 const app = express();
@@ -81,7 +81,7 @@ if (authRoutes) {
 }
 
 // 404 + error handler (keep after routes)
-app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
+app.use((_req, res) => res.status(404).json({ error: 'Nope' }));
 app.use((err, _req, res, _next) => {
   console.error('Unhandled error:', err);
   res.status(500).json({ error: 'Internal Server Error' });
