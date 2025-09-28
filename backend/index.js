@@ -1,123 +1,98 @@
-// Managing middleware and routes
-
-// Initial setup for auth and loading environment variables
-// Using Mongoose for MongoDB
 // backend/index.js
 
-// require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
-
-// console.log('Using username:', (process.env.MONGODB_URI || '').split('://')[1]?.split(':')[0]);
-
-
-
+// 0) Robust .env loader
 const path = require('path');
 const fs = require('fs');
-const candidates = [
-  path.join(__dirname, '.env'),        // /backend/.env
-  path.join(__dirname, '..', '.env'),  // project-root/.env
-];
-let loaded = false;
+const candidates = [path.join(__dirname, '.env'), path.join(__dirname, '..', '.env')];
 for (const p of candidates) {
   if (fs.existsSync(p)) {
     require('dotenv').config({ path: p });
     console.log('Loaded .env from:', p);
-    loaded = true;
     break;
   }
 }
-if (!loaded) {
-  console.error('No .env file found at:', candidates.join(' or '));
-}
-
-// TEMP sanity logs (remove after it works)
 console.log('MONGODB_URI present?', !!process.env.MONGODB_URI);
 console.log('MONGODB_DB:', process.env.MONGODB_DB);
 
-// AFTER the robust .env loader block
-const uri = process.env.MONGODB_URI || '';
-const parsedUser = uri.split('://')[1]?.split('@')[0]?.split(':')[0];
-console.log('MONGODB_URI present?', !!process.env.MONGODB_URI);
-console.log('Username from URI:', parsedUser);
-console.log('MONGODB_DB:', process.env.MONGODB_DB);
-
-
-
-
-// Imports
+// 1) Imports
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const logger = require('../middleware/logger')
-const errorHandler = require('../middleware/errorHandler')
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 
-let authRoutes;
-try {
-  authRoutes = require('./routes/authRoutes');
-} catch {
-  console.warn('./routes/authRoutes not found yet — skipping');
-}
+// custom middleware (paths are relative to /backend)
+const { logger } = require('./middleware/logger');
+const errorHandler = require('./middleware/errorHandler');
 
+// routes (filename must match exactly)
+const authRoutes = require('./routes/authRoutes'); // <-- you said this is the name
+
+// 2) App + core middleware
 const app = express();
-
-// Core middleware
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
-  credentials: true,
-}));
+app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(logger);
 
-// Health + base
+// 3) Health & base
 app.get('/health', (_req, res) => res.status(200).json({ ok: true }));
 app.get('/', (_req, res) => res.send('Successfully called the web server'));
 
-// Routes
-if (authRoutes) {
-  app.use('/auth', rateLimit({ windowMs: 60_000, max: 60 }), authRoutes);
-}
+// 4) Routes (mount ONCE, after app is created)
+app.use('/auth', rateLimit({ windowMs: 60_000, max: 60 }), authRoutes);
 
-// 404 + error handler (keep after routes)
-app.use((_req, res) => res.status(404).json({ error: 'Nope' }));
-app.use((err, _req, res, _next) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ error: 'Internal Server Error' });
+const bcrypt = require('bcryptjs');
+const User = require('./models/User');
+
+app.post('/__seed_user', async (req, res) => {
+  try {
+    const username = 'app_user';
+    const passwordHash = await bcrypt.hash('12345', 12);
+    const user = await User.findOneAndUpdate(
+      { username: username.toLowerCase() },
+      { username: username.toLowerCase(), passwordHash, roles: ['admin'], active: true },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+    res.status(201).json({ id: user._id, username: user.username, roles: user.roles, active: user.active });
+  } catch (e) {
+    console.error('seed error:', e);
+    res.status(500).json({ error: 'seed failed' });
+  }
 });
 
+
+
+
+
+
+
+
+
+
+
+
+// 5) 404 + error handler (keep last)
+app.use((_req, res) => res.status(404).json({ error: 'No' }));
+app.use(errorHandler);
+
+// 6) Connect DB & start server
 const PORT = process.env.PORT || 3000;
-
-
-
-async function connectDB() {
+(async () => {
   if (!process.env.MONGODB_URI) {
     console.error('Missing MONGODB_URI in .env');
     process.exit(1);
   }
-
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: process.env.MONGODB_DB || 'shellhacks',
+    });
     console.log('Connected to MongoDB');
-
-    const server = app.listen(PORT, () =>
-      console.log(`Server running on http://localhost:${PORT}`)
-    );
-
-    // Graceful shutdown
-    const shutdown = async () => {
-      console.log('Shutting down...');
-      await mongoose.connection.close(false);
-      server.close(() => process.exit(0));
-    };
-    process.on('SIGINT', shutdown);
-    process.on('SIGTERM', shutdown);
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
   } catch (err) {
     console.error('Mongo connect error:', err.message);
     process.exit(1);
   }
-}
-
-app.use(errorHandler)
-connectDB();
+})();
