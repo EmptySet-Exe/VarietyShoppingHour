@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import Product from "../models/product.model.js";
 // import mongoose from 'mongoose';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI("AIzaSyDLa_NnKtz3D0ycs9awrUp7sxSgZqDQzys");
 
 const promptAI = async (req, res) => {
   try {
@@ -54,7 +54,7 @@ function formatPromptForSuggestion(productData, userPrompt){
     Please provide product suggestions based on this preference: ${userPrompt}
 
     Respond with the ids of the products only.
-    If more than one product matches the preference, respond with json array containing the list of product ids.
+    If more than one product matches the preference, respond with comma separated list of the ids containing the list of product ids.
     If no product matches the preference, respond with "None".
     `;
 }

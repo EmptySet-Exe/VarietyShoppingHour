@@ -33,4 +33,4 @@ app.listen(port, () =>
 });
 
 
-app.use("/aichat", geminiRoutes)
+app.use("/api/gemini", geminiRoutes)
