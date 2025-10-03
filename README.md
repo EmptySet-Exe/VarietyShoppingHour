@@ -1,6 +1,7 @@
 # **VarietyShoppingHour**
 
-*"Shopping's Golden Hour finally has some variety!"*
+![](imgs/varietyshoppinghour.jpg)
+*("Shopping's Golden Hour finally has some variety!")*
 
 ---
 
@@ -24,7 +25,7 @@ This project is a hackathon-built wishlist app in which you can organize shoppin
 ![Add New](imgs/add_new.gif)
 *(Add entries to your wishlist)*
 
-![Update](imgs/update_product.mp4.gif)  
+![Update](imgs/update_product.gif)  
 *(Update entries in your wishlist)*
 
 ![Delete](imgs/delete.gif)  
@@ -34,7 +35,7 @@ This project is a hackathon-built wishlist app in which you can organize shoppin
 *(Filter wishlist using Gemini AI)*
 
 ![Dark Mode](imgs/dark_mode.gif)  
-*(Style your wishlist with the lights off)*
+*(Make your wishlist with the lights off)*
 
 ---
 
