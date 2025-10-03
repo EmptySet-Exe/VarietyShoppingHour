@@ -6,36 +6,35 @@
 
 ## **Table of Contents**
 1. [About the Project](#about-the-project)  
-2. [Features](#features)  
-3. [Screenshots](#screenshots)  
-4. [Getting Started](#getting-started)  
-5. [License](#license)  
-6. [Team](#team)
-7. [Acknowledgements](#acknowledgments)
+2. [Features](#features)    
+3. [Getting Started](#getting-started)  
+4. [License](#license)  
+5. [Team](#team)
+6. [Acknowledgements](#acknowledgments)
 
 ---
 
 ## **About the Project**
-This project is a <FORM> in which <HOOK> for [ShellHacks 2025](https://shellhacks.net/).
+This project is a hackathon-built wishlist app in which you can organize shopping items with the help of Gemini AI validation—a tool we put together in 36 hours at [ShellHacks 2025](https://shellhacks.net/).
 
 ---
 
 ## **Features**
-- Add - <CONTENT>
-- Delete - <CONTENT>
-- Edit - <CONTENT>
 
----
+![Add New](GitHub/imgs/add_new.gif)
+*(Add entries to your wishlist)*
 
-## **Screenshots**
-Add a few screenshots or GIFs to showcase the project visually:
+![Update](GitHub/imgs/update_product.mp4.gif)  
+*(Update entries in your wishlist)*
 
-**Gameplay Example:**  
-![APP_EXAMPLE_01](GitHub/imgs/<app_example_01>.png)  
-*(<EXAMPLE_DESCRIPTION_01>)*
+![Delete](GitHub/imgs/delete.gif)  
+*(Delete entries from your wishlist)*
 
-![APP_EXAMPLE_02](GitHub/imgs/<app_example_02>.png)  
-*(<EXAMPLE_DESCRIPTION_02>)*
+![Gemini AI](GitHub/imgs/Gemini_AI.gif)  
+*(Filter wishlist using Gemini AI)*
+
+![Dark Mode](GitHub/imgs/dark_mode.gif)  
+*(Style your wishlist with the lights off)*
 
 ---
 
@@ -88,8 +87,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - GitHub:
   - [@Roberto Hogas Goras](https://github.com/rhogas)  
-  - [@Hershey ](https://github.com/strigoaraneo)
-  - [@Ritesh ](https://github.com/riteshhattarki)  
+  - [@Shanmukha "Hershey" Harshith Karamala](https://github.com/strigoaraneo)
+  - [@Ritesh Hattarki](https://github.com/riteshhattarki)  
   - [@Surpris "Jack" Mezardieu](https://github.com/EmptySet-Exe)  
 
 
