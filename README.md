@@ -16,26 +16,26 @@
 ---
 
 ## **About the Project**
-This project is a hackathon-built wishlist app in which you can organize shopping items with the help of Gemini AI validation—a tool we put together in 36 hours at [ShellHacks 2025](https://shellhacks.net/).
+This project is a hackathon-built wishlist app in which you can organize shopping items and retrieve them with the help of suggestions from Gemini AI - a tool we put together in 36 hours at [ShellHacks 2025](https://shellhacks.net/).
 
 ---
 
 ## **Features**
 
+*Add entries to your wishlist*
 ![Add New](imgs/add_new.gif)
-*(Add entries to your wishlist)*
 
+*Update entries in your wishlist*
 ![Update](imgs/update_product.gif)  
-*(Update entries in your wishlist)*
 
+*Delete entries from your wishlist*
 ![Delete](imgs/delete.gif)  
-*(Delete entries from your wishlist)*
 
-![Gemini AI](imgs/Gemini_AI.gif)  
-*(Filter wishlist using Gemini AI)*
+*Filter wishlist using Gemini AI*
+![Gemini AI](imgs/gemini_AI.gif)  
 
+*Make your wishlist with the lights off*
 ![Dark Mode](imgs/dark_mode.gif)  
-*(Make your wishlist with the lights off)*
 
 ---
 
@@ -61,8 +61,8 @@ Install dependencies:
 npm i
 ```
 
-[! NOTE]
-You need to create a .env file that holds you MongoDB URI and BACKEND_PORT (otherwise, default 3000)
+[!NOTE]
+You need to create a .env file that holds you MongoDB URI, BACKEND_PORT (otherwise, default 3000) and GEMINI_API_KEY.
 
 To start the app in dev mode:
 
