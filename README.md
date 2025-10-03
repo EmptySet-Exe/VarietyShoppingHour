@@ -32,7 +32,7 @@ This project is a hackathon-built wishlist app in which you can organize shoppin
 ![Delete](imgs/delete.gif)  
 
 *Filter wishlist using Gemini AI*
-![Gemini AI](imgs/gemini_AI.gif)  
+![Gemini AI](imgs/Gemini_AI.gif)  
 
 *Make your wishlist with the lights off*
 ![Dark Mode](imgs/dark_mode.gif)  
