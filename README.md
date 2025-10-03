@@ -21,19 +21,19 @@ This project is a hackathon-built wishlist app in which you can organize shoppin
 
 ## **Features**
 
-![Add New](GitHub/imgs/add_new.gif)
+![Add New](imgs/add_new.gif)
 *(Add entries to your wishlist)*
 
-![Update](GitHub/imgs/update_product.mp4.gif)  
+![Update](imgs/update_product.mp4.gif)  
 *(Update entries in your wishlist)*
 
-![Delete](GitHub/imgs/delete.gif)  
+![Delete](imgs/delete.gif)  
 *(Delete entries from your wishlist)*
 
-![Gemini AI](GitHub/imgs/Gemini_AI.gif)  
+![Gemini AI](imgs/Gemini_AI.gif)  
 *(Filter wishlist using Gemini AI)*
 
-![Dark Mode](GitHub/imgs/dark_mode.gif)  
+![Dark Mode](imgs/dark_mode.gif)  
 *(Style your wishlist with the lights off)*
 
 ---
