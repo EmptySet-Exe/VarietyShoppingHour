@@ -61,8 +61,8 @@ Install dependencies:
 npm i
 ```
 
-[!NOTE]
-You need to create a .env file that holds you MongoDB URI, BACKEND_PORT (otherwise, default 3000) and GEMINI_API_KEY.
+> [!NOTE]
+> You need to create a .env file that holds you MongoDB URI, BACKEND_PORT (otherwise, default 3000) and GEMINI_API_KEY.
 
 To start the app in dev mode:
 
